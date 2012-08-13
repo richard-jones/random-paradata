@@ -2,8 +2,10 @@
 #HE/FE	Record Origin	Record Created Date	JAX Classification	Subject Keywords	Type
 
 import uuid
-from random import random
+from random import random, randint
 import os, csv
+from datetime import datetime
+import time
 
 SIZE = 100
 
@@ -123,7 +125,80 @@ HE_JAX = [
     ("Veterinary Sciences, Agriculture and related subjects", 950)
     ]
 
-KEYWORDS = []
+KEYWORDS = {
+    "Agriculture Horticulture & Animal Care": ['vet', 'farm', 'dog', 'cow', 'pig'],
+    "Area Studies / Cultural Studies / Languages / Literature": ['english', 'french', 'german', 'welsh', 'finnish'],
+    "Arts & Crafts": ['buttons', 'textiles', 'handmade', 'collage', 'beads'],
+    "Business / Management / Office Studies": ['money', 'power', 'desks', 'corporate', 'structure'],
+    "Catering / Food / Leisure Services / Tourism": ['eating', 'restaurant', 'waiting', 'customer', 'gym'],
+    "Communication / Media / Publishing": ['newspaper', 'internet', 'magazine', 'layout', 'design'],
+    "Construction & Property (Built Environment)": ['concrete', 'architecture', 'engineering', 'lettings', 'foundations'],
+    "Education / Training / Teaching": ['course', 'study', 'learn', 'exam', 'class'],
+    "Engineering": ['building', 'software', 'physics', 'design', 'technical'],
+    "Environment Protection / Energy / Cleansing / Security": ['sustainable', 'nuclear', 'turbine', 'carbon', 'wave'],
+    "Family Care / Personal Development / Personal Care & Appearance": ['children', 'washing', 'grooming', 'comb', 'clothes'],
+    "Health Care / Medicine / Health & Safety": ['hospital', 'gp', 'antibiotics', 'antiviral', 'compliance'],
+    "Humanities (History / Archaeology / Religious Studies / Philosophy)": ['books', 'digging', 'bible', 'neitchze', 'hume'],
+    "Information Technology & Information": ['computer', 'software', 'architecture', 'python', 'java'],
+    "Logistics / Distribution / Transport / Driving": ['truck', 'van', 'road', 'parcel', 'route'],
+    "Manufacturing / Production Work": ['process', 'timeline', 'flow', 'machinery', 'factory'],
+    "Oil / Mining / Plastics / Chemicals": ['drill', 'mould', 'dig', 'quarry', 'mine'],
+    "Performing Arts": ['dance', 'mime', 'play', 'interpretive', 'theatre'],
+    "Politics / Economics / Law / Social Sciences": ['mp', 'mep', 'judge', 'survey', 'model'],
+    "Sales Marketing & Retailing": ['research', 'market', 'shop', 'store', 'highstreet'],
+    "Sciences & Mathematics": ['physics', 'chemistry', 'biology', 'nuroscience', 'statistics'],
+    "Sports Games & Recreation": ['judo', 'fencing', 'wrestling', 'athletics', 'darts'],
+    "Architecture, Building and Planning": ['listed', 'neo', 'modern', 'baroque', 'gothic'],
+    "Biological Sciences": ['worm', 'organism', 'cell', 'microbe', 'philum'],
+    "Business and Administrative studies": ['spreadsheet', 'document', 'tax', 'hr', 'finance'],
+    "Creative Arts and Design": ['collage', 'blueprint', 'drawing', 'template', 'theatre'],
+    "Eastern, Asiatic, African, American and Australasian Languages, Literature and related subjects": ['mongolian', 'mandarin', 'cantonese', 'taiwanese', 'hindi'],
+    "Education": ['primary', 'secondary', 'he', 'fe', 'postgraduate'],
+    "Engineering": ['cogs', 'gears', 'bridges', 'buildings', 'software'],
+    "European Languages, Literature and related subjects": ['english', 'french', 'german', 'dutch', 'norwegian'],
+    "Historical and Philosophical studies": ['neitchze', 'descartes', 'malory', 'hume', 'chaucer'],
+    "Law": ['criminal', 'property', 'corporate', 'contract', 'enforcement'],
+    "Linguistics, Classics and related subjects": ['phonics', 'syntax', 'grammar', 'latin', 'greek'],
+    "Mass Communications and Documentation": ['internet', 'twitter', 'facebook', 'magazine', 'newspaper'],
+    "Mathematical and Computer Sciences": ['turing', 'computability', 'completeness', 'programming', 'software'],
+    "Medicine and Dentistry": ['teeth', 'organs', 'heart', 'drill', 'liver'],
+    "Physical Sciences": ['physics', 'mechanics', 'gravity', 'relativity', 'velocity'],
+    "Social studies": ['survey', 'anthropology', 'geography', 'human', 'life'],
+    "Subjects allied to Medicine": ['neurology', 'neuroscience', 'holistics', 'pharmacology', 'pharmacy'],
+    "Technologies": ['java', 'python', 'windows', 'linux', 'osx'],
+    "Veterinary Sciences, Agriculture and related subjects": ['cats', 'dogs', 'pigs', 'cows', 'fish']
+}
+
+LETTER_PAIRS = {
+    "a" : ["b", "d", "g", "l", "m", "n", "r", "s", "t", "y"],
+    "b" : ["a", "e", "i", "l", "o", "r", "y"],
+    "c" : ["a", "e", "h", "k", "o"],
+    "d" : ["a", "d", "e", "i", "o"],
+    "e" : ["d", "g", "l", "m", "n", "p", "r", "s", "t", "y"],
+    "f" : ["a", "e", "i", "o"],
+    "g" : ["a", "e", "g", "h", "i", "l", "o", "r", "y"],
+    "h" : ["a", "e", "i", "o", "u", "y"],
+    "i" : ["b", "d", "f", "l", "m", "n", "p", "r", "s", "t"],
+    "j" : ["a", "e", "o", "u"],
+    "k" : ["a", "e", "i", "l", "n", "o", "s", "y"],
+    "l" : ["a", "e", "i", "k", "l", "o", "p", "t", "u", "y"],
+    "m" : ["a", "e", "i", "m", "o", "p", "u", "y"],
+    "n" : ["a", "d", "e", "g", "i", "k", "n", "o", "s", "u", "y"],
+    "o" : ["b", "c", "d", "f", "g", "l", "m", "n", "o", "p", "r", "s", "t", "w", "y"],
+    "p" : ["a", "e", "h", "i", "l", "o", "p", "r", "s", "t", "u", "y"],
+    "q" : ["u"],
+    "r" : ["a", "e", "i", "k", "n", "o", "p", "r", "s", "t", "u", "y"],
+    "s" : ["a", "c", "e", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "s", "t", "u", "w"],
+    "t" : ["a", "e", "h", "i", "o", "r", "t", "u", "w", "y"],
+    "u" : ["b", "d", "g", "l", "m", "n", "p", "r", "s", "t"],
+    "v" : ["a", "e", "i", "o", "u", "y"],
+    "w" : ["a", "d", "e", "h", "i", "l", "o"],
+    "x" : ["a", "e", "y"],
+    "y" : ["a", "e", "i", "o", "u"],
+    "z" : ["e"]
+}
+
+WEB_RES_OR_FT = [('wr', 0.5), ('ft', 0.5)]
 
 def generate_record(id):
     record = {}
@@ -131,25 +206,62 @@ def generate_record(id):
     record['title'] = uuid.uuid4()
     record['description'] = 'Lorem Ipsum Dolor'
     record['language'] = select_from(LANGUAGES)
-    record['creator'] = uuid.uuid4()
-    record['publisher'] = uuid.uuid4()
+    record['creator_id'] = uuid.uuid4()
+    record['creator'] = random_name()
+    # FIXME: have omitted publisher, this is very thin on the ground in Jorum
+    # record['publisher'] = uuid.uuid4()
     record['format'] = select_from(FILE_FORMATS)
     record['he_fe'] = select_from(HE_FE)
     record['origin'] = select_from(ORIGIN)
-    record['created_date'] = None # randomise the date
     record['type'] = None # what are the options here
-    record['keywords'] = None # need to figure these out from the jax
+    record['created_date'] = random_date()
     
     # now the conditionals
     if record['he_fe'] == "HE":
         record['affiliation'] = select_from(HE_AFFILIATIONS)
-        record['jax'] = select_from(HE_JAX)
+        record['jacs'] = select_from(HE_JAX)
     else:
         record['affiliation'] = select_from(FE_AFFILIATIONS)
-        record['jax'] = select_from(FE_JAX)
+        record['jacs'] = select_from(FE_JAX)
+    
+    record['keywords'] = random_keywords(record['jacs'])
+    
+    record['web_resource'] = 'false'
+    record['full_text'] = 'false'
+    wr_ft = select_from(WEB_RES_OR_FT)
+    if wr_ft == "wr":
+        record['web_resource'] = 'true'
+    else:
+        record['full_text'] = 'true'
     
     return record
+
+def random_keywords(jacs):
+    kws = KEYWORDS[jacs]
+    num = randint(1, 5)
+    rkws = []
+    for i in range(num):
+        select = randint(0, 4)
+        k = kws[select]
+        if k not in rkws:
+            rkws.append(k)
+    return rkws
+
+def random_date():
+    return datetime.strftime(datetime.fromtimestamp(time.time() - randint(0, 400000000)), "%Y-%m-%dT%H:%M:%SZ")
     
+
+def random_name():
+    name = ""
+    length = randint(5, 10)
+    letter = LETTER_PAIRS.keys()[randint(0, len(LETTER_PAIRS.keys()) - 1)]
+    while len(name) < length:
+        name += letter
+        letter = LETTER_PAIRS[letter][randint(0, len(LETTER_PAIRS[letter]) - 1)]
+    
+    initial = LETTER_PAIRS.keys()[randint(0, len(LETTER_PAIRS.keys()) - 1)]
+    name = name + ", " + initial
+    return name
     
 def select_from(arr):
     narr = normalise_probability_matrix(arr)
@@ -180,9 +292,12 @@ for id in range(SIZE):
     oers.append(generate_record(id))
 oer_csv = open("oers.csv", "w")
 writer = csv.writer(oer_csv)
+writer.writerow(["OER ID", "TITLE", "DESCRIPTION", "LANGUAGE", "AFFILIATION", "CREATOR", "CREATOR_ID", 
+                    "FORMAT", "HE/FE", "ORIGIN", "CREATED DATE", "JACS", "KEYWORDS", "TYPE", "WEB RESOURCE",
+                    "FULL TEXT"])
 for oer in oers:
     writer.writerow([oer['id'], oer['title'], oer['description'], oer['language'],
-                    oer['affiliation'], oer['creator'], oer['publisher'], oer['format'],
-                    oer['he_fe'], oer['origin'], oer['created_date'], oer['jax'],
-                    oer['keywords'], oer['type']])
+                    oer['affiliation'], oer['creator'], oer['creator_id'], oer['format'],
+                    oer['he_fe'], oer['origin'], oer['created_date'], oer['jacs'],
+                    ",".join(oer['keywords']), oer['type'], oer['web_resource'], oer['full_text']])
 oer_csv.close()
