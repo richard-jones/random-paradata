@@ -8,6 +8,8 @@ from datetime import datetime
 import time
 
 SIZE = 100
+MAX_VIEWS = 100
+MAX_DOWNLOADS = 50
 
 LANGUAGES = [("en", 0.1), ("en-GB", 0.7), ("en-US", 0.1), ("fr", 0.2)]
 HE_AFFILIATIONS = [("The Open University", 193835),
@@ -247,10 +249,15 @@ def random_keywords(jacs):
             rkws.append(k)
     return rkws
 
-def random_date():
-    return datetime.strftime(datetime.fromtimestamp(time.time() - randint(0, 400000000)), "%Y-%m-%dT%H:%M:%SZ")
+def random_date(after=None):
+    max_lookback = 400000000
+    now = time.time()
+    if after is not None:
+        t = time.strptime(after, "%Y-%m-%dT%H:%M:%SZ")
+        ts = time.mktime(t)
+        max_lookback = now - ts
+    return datetime.strftime(datetime.fromtimestamp(now - randint(0, int(max_lookback) - 1)), "%Y-%m-%dT%H:%M:%SZ")
     
-
 def random_name():
     name = ""
     length = randint(5, 10)
@@ -301,3 +308,66 @@ for oer in oers:
                     oer['he_fe'], oer['origin'], oer['created_date'], oer['jacs'],
                     ",".join(oer['keywords']), oer['type'], oer['web_resource'], oer['full_text']])
 oer_csv.close()
+
+def random_ip():
+    a = randint(0, 255)
+    b = randint(0, 255)
+    c = randint(0, 255)
+    d = randint(0, 255)
+    return str(a) + "." + str(b) + "." + str(c) + "." + str(d)
+
+def random_lat():
+    big = randint(-50, 70)
+    small = randint(0, 9999)
+    lat = str(big) + "." + str(small)
+    return lat
+    
+def random_long():
+    big = randint(-180, 180)
+    small = randint(0, 9999)
+    long = ""
+    if big == 180 or big == -180:
+        long = str(big) + ".0000"
+    else:
+        long = str(big) + "." + str(small)
+    return long
+
+def add_create(oer, events):
+    event = [oer['id'], 'create', oer['created_date'], random_ip(), random_lat(), random_long()]
+    events.append(event)
+    
+def add_views(oer, events):
+    view_count = randint(1, MAX_VIEWS)
+    for i in range(view_count):
+        event = [oer['id'], 'view', random_date(oer['created_date']), random_ip(), random_lat(), random_long()]
+        events.append(event)
+    
+def add_downloads(oer, events):
+    view_count = count_views(events)
+    if view_count > MAX_DOWNLOADS:
+        view_count = MAX_DOWNLOADS
+    download_count = randint(1, view_count)
+    for i in range(download_count):
+        event = [oer['id'], 'download', random_date(oer['created_date']), random_ip(), random_lat(), random_long()]
+        events.append(event)
+
+def count_views(events):
+    total = 0
+    for event in events:
+        if event[1] == "view":
+            total += 1
+    return total
+
+# ID	Statistical Event	Statistical Event Date	Statistical Event IP	
+# Statistical Event Lat	Statistical Event Long
+stat_csv = open("stats.csv", "w")
+stat_writer = csv.writer(stat_csv)
+stat_writer.writerow(["OER ID", "EVENT", "EVENT DATE", "IP", "LAT", "LONG"])
+for oer in oers:
+    events = []
+    add_create(oer, events)
+    add_views(oer, events)
+    add_downloads(oer, events)
+    for event in events:
+        stat_writer.writerow(event)
+stat_csv.close()
