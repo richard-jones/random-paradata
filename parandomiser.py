@@ -80,7 +80,33 @@ FE_AFFILIATIONS = [
     ]
 ORIGIN = [("Repository", 0.3), ("Manual Entry", 0.1), ("Bulk Upload", 0.6)]
 
-FE_JAX = [
+FE_LD = [
+    ("Agriculture Horticulture and Animal Care", 16),
+    ("Area Studies / Cultural Studies / Languages / Literature", 94),
+    ("Arts and Crafts", 74),
+    ("Business / Management / Office Studies", 119),
+    ("Catering / Food / Leisure Services / Tourism", 192),
+    ("Communication / Media / Publishing", 55),
+    ("Construction and Property (Built Environment)", 115),
+    ("Education / Training / Teaching", 860),
+    ("Engineering", 79),
+    ("Environment Protection / Energy / Cleansing / Security", 2),
+    ("Family Care / Personal Development / Personal Care and Appearance", 67),
+    ("Health Care / Medicine / Health and Safety", 285),
+    ("Humanities (History / Archaeology / Religious Studies / Philosophy)", 29),
+    ("Information Technology and Information", 281),
+    ("Logistics / Distribution / Transport / Driving", 0),
+    ("Manufacturing / Production Work", 14),
+    ("Oil / Mining / Plastics / Chemicals", 3),
+    ("Performing Arts", 121),
+    ("Politics / Economics / Law / Social Sciences", 108),
+    ("Sales Marketing and Retailing", 94),
+    ("Sciences and Mathematics", 264),
+    ("Sports Games and Recreation", 32)
+    ]
+
+"""
+FE_LD = [
     ("Agriculture Horticulture & Animal Care", 16),
     ("Area Studies / Cultural Studies / Languages / Literature", 94),
     ("Arts & Crafts", 74),
@@ -104,8 +130,59 @@ FE_JAX = [
     ("Sciences & Mathematics", 264),
     ("Sports Games & Recreation", 32)
     ]
+"""
 
-HE_JAX = [
+"""
+FE_LD = [
+    ("AGRICULTURE HORTICULTURE and ANIMAL CARE", 16),
+    ("AREA STUDIES / CULTURAL STUDIES / LANGUAGES / LITERATURE", 94),
+    ("ARTS and CRAFTS", 74),
+    ("BUSINESS / MANAGEMENT / OFFICE STUDIES", 119),
+    ("CATERING / FOOD / LEISURE SERVICES / TOURISM", 192),
+    ("COMMUNICATION / MEDIA / PUBLISHING", 55),
+    ("CONSTRUCTION and PROPERTY (BUILT ENVIRONMENT)", 115),
+    ("EDUCATION / TRAINING / TEACHING", 860),
+    ("Engineering", 79),
+    ("Environment Protection / Energy / Cleansing / Security", 2),
+    ("FAMILY CARE / PERSONAL DEVELOPMENT / PERSONAL CARE and APPEARANCE", 67),
+    ("Health Care / Medicine / Health and Safety", 285),
+    ("Humanities (History / Archaeology / Religious Studies / Philosophy)", 29),
+    ("Information Technology and Information", 281),
+    ("Logistics / Distribution / Transport / Driving", 0),
+    ("Manufacturing / Production Work", 14),
+    ("Oil / Mining / Plastics / Chemicals", 3),
+    ("Performing Arts", 121),
+    ("Politics / Economics / Law / Social Sciences", 108),
+    ("Sales Marketing and Retailing", 94),
+    ("Sciences and Mathematics", 264),
+    ("Sports Games and Recreation", 32)
+    ]
+"""
+
+HE_JACS = [
+    ("Architecture, Building & Planning", 66),
+    ("Biological Sciences", 366),
+    ("Business & Administrative studies", 695),
+    ("Creative Arts & Design", 4304),
+    ("Eastern, Asiatic, African, American & Australasian Languages, Literature & related subjects", 11),
+    ("Education", 1310),
+    ("Engineering", 1349),
+    ("European Languages, Literature & related subjects", 366),
+    ("Historical & Philosophical studies", 925),
+    ("Law", 80),
+    ("Linguistics, Classics & related subjects", 53),
+    ("Mass Communications & Documentation", 139),
+#    ("Mathematical & Computer Sciences", 1019), # not in JACS 3.0
+    ("Medicine & Dentistry", 307),
+    ("Physical Sciences", 547),
+    ("Social studies", 1004),
+    ("Subjects allied to Medicine", 421),
+    ("Technologies", 123),
+    ("Veterinary Sciences, Agriculture & related subjects", 950)
+    ]
+
+"""
+HE_JACS = [
     ("Architecture, Building and Planning", 66),
     ("Biological Sciences", 366),
     ("Business and Administrative studies", 695),
@@ -126,49 +203,50 @@ HE_JAX = [
     ("Technologies", 123),
     ("Veterinary Sciences, Agriculture and related subjects", 950)
     ]
+"""
 
 KEYWORDS = {
-    "Agriculture Horticulture & Animal Care": ['vet', 'farm', 'dog', 'cow', 'pig'],
+    "Agriculture Horticulture and Animal Care": ['vet', 'farm', 'dog', 'cow', 'pig'],
     "Area Studies / Cultural Studies / Languages / Literature": ['english', 'french', 'german', 'welsh', 'finnish'],
-    "Arts & Crafts": ['buttons', 'textiles', 'handmade', 'collage', 'beads'],
+    "Arts and Crafts": ['buttons', 'textiles', 'handmade', 'collage', 'beads'],
     "Business / Management / Office Studies": ['money', 'power', 'desks', 'corporate', 'structure'],
     "Catering / Food / Leisure Services / Tourism": ['eating', 'restaurant', 'waiting', 'customer', 'gym'],
     "Communication / Media / Publishing": ['newspaper', 'internet', 'magazine', 'layout', 'design'],
-    "Construction & Property (Built Environment)": ['concrete', 'architecture', 'engineering', 'lettings', 'foundations'],
+    "Construction and Property (Built Environment)": ['concrete', 'architecture', 'engineering', 'lettings', 'foundations'],
     "Education / Training / Teaching": ['course', 'study', 'learn', 'exam', 'class'],
     "Engineering": ['building', 'software', 'physics', 'design', 'technical'],
     "Environment Protection / Energy / Cleansing / Security": ['sustainable', 'nuclear', 'turbine', 'carbon', 'wave'],
-    "Family Care / Personal Development / Personal Care & Appearance": ['children', 'washing', 'grooming', 'comb', 'clothes'],
-    "Health Care / Medicine / Health & Safety": ['hospital', 'gp', 'antibiotics', 'antiviral', 'compliance'],
+    "Family Care / Personal Development / Personal Care and Appearance": ['children', 'washing', 'grooming', 'comb', 'clothes'],
+    "Health Care / Medicine / Health and Safety": ['hospital', 'gp', 'antibiotics', 'antiviral', 'compliance'],
     "Humanities (History / Archaeology / Religious Studies / Philosophy)": ['books', 'digging', 'bible', 'neitchze', 'hume'],
-    "Information Technology & Information": ['computer', 'software', 'architecture', 'python', 'java'],
+    "Information Technology and Information": ['computer', 'software', 'architecture', 'python', 'java'],
     "Logistics / Distribution / Transport / Driving": ['truck', 'van', 'road', 'parcel', 'route'],
     "Manufacturing / Production Work": ['process', 'timeline', 'flow', 'machinery', 'factory'],
     "Oil / Mining / Plastics / Chemicals": ['drill', 'mould', 'dig', 'quarry', 'mine'],
     "Performing Arts": ['dance', 'mime', 'play', 'interpretive', 'theatre'],
     "Politics / Economics / Law / Social Sciences": ['mp', 'mep', 'judge', 'survey', 'model'],
-    "Sales Marketing & Retailing": ['research', 'market', 'shop', 'store', 'highstreet'],
-    "Sciences & Mathematics": ['physics', 'chemistry', 'biology', 'nuroscience', 'statistics'],
-    "Sports Games & Recreation": ['judo', 'fencing', 'wrestling', 'athletics', 'darts'],
-    "Architecture, Building and Planning": ['listed', 'neo', 'modern', 'baroque', 'gothic'],
+    "Sales Marketing and Retailing": ['research', 'market', 'shop', 'store', 'highstreet'],
+    "Sciences and Mathematics": ['physics', 'chemistry', 'biology', 'nuroscience', 'statistics'],
+    "Sports Games and Recreation": ['judo', 'fencing', 'wrestling', 'athletics', 'darts'],
+    "Architecture, Building & Planning": ['listed', 'neo', 'modern', 'baroque', 'gothic'],
     "Biological Sciences": ['worm', 'organism', 'cell', 'microbe', 'philum'],
-    "Business and Administrative studies": ['spreadsheet', 'document', 'tax', 'hr', 'finance'],
-    "Creative Arts and Design": ['collage', 'blueprint', 'drawing', 'template', 'theatre'],
-    "Eastern, Asiatic, African, American and Australasian Languages, Literature and related subjects": ['mongolian', 'mandarin', 'cantonese', 'taiwanese', 'hindi'],
+    "Business & Administrative studies": ['spreadsheet', 'document', 'tax', 'hr', 'finance'],
+    "Creative Arts & Design": ['collage', 'blueprint', 'drawing', 'template', 'theatre'],
+    "Eastern, Asiatic, African, American & Australasian Languages, Literature & related subjects": ['mongolian', 'mandarin', 'cantonese', 'taiwanese', 'hindi'],
     "Education": ['primary', 'secondary', 'he', 'fe', 'postgraduate'],
     "Engineering": ['cogs', 'gears', 'bridges', 'buildings', 'software'],
-    "European Languages, Literature and related subjects": ['english', 'french', 'german', 'dutch', 'norwegian'],
-    "Historical and Philosophical studies": ['neitchze', 'descartes', 'malory', 'hume', 'chaucer'],
+    "European Languages, Literature & related subjects": ['english', 'french', 'german', 'dutch', 'norwegian'],
+    "Historical & Philosophical studies": ['neitchze', 'descartes', 'malory', 'hume', 'chaucer'],
     "Law": ['criminal', 'property', 'corporate', 'contract', 'enforcement'],
-    "Linguistics, Classics and related subjects": ['phonics', 'syntax', 'grammar', 'latin', 'greek'],
-    "Mass Communications and Documentation": ['internet', 'twitter', 'facebook', 'magazine', 'newspaper'],
-    "Mathematical and Computer Sciences": ['turing', 'computability', 'completeness', 'programming', 'software'],
-    "Medicine and Dentistry": ['teeth', 'organs', 'heart', 'drill', 'liver'],
+    "Linguistics, Classics & related subjects": ['phonics', 'syntax', 'grammar', 'latin', 'greek'],
+    "Mass Communications & Documentation": ['internet', 'twitter', 'facebook', 'magazine', 'newspaper'],
+    "Mathematical & Computer Sciences": ['turing', 'computability', 'completeness', 'programming', 'software'],
+    "Medicine & Dentistry": ['teeth', 'organs', 'heart', 'drill', 'liver'],
     "Physical Sciences": ['physics', 'mechanics', 'gravity', 'relativity', 'velocity'],
     "Social studies": ['survey', 'anthropology', 'geography', 'human', 'life'],
     "Subjects allied to Medicine": ['neurology', 'neuroscience', 'holistics', 'pharmacology', 'pharmacy'],
     "Technologies": ['java', 'python', 'windows', 'linux', 'osx'],
-    "Veterinary Sciences, Agriculture and related subjects": ['cats', 'dogs', 'pigs', 'cows', 'fish']
+    "Veterinary Sciences, Agriculture & related subjects": ['cats', 'dogs', 'pigs', 'cows', 'fish']
 }
 
 LETTER_PAIRS = {
@@ -202,6 +280,16 @@ LETTER_PAIRS = {
 
 WEB_RES_OR_FT = [('wr', 0.5), ('ft', 0.5)]
 
+jacs_csv = csv.reader(open("JACS3_20120529.csv"))
+JACS3 = {}
+for row in jacs_csv:
+    JACS3[row[0]] = row[1]
+    
+ld_csv = csv.reader(open("HEIFESFAQ1_LDCS_CODES.csv"))
+LD = {}
+for row in ld_csv:
+    LD[row[0]] = row[1]
+
 def generate_record(id):
     record = {}
     record['id'] = id
@@ -221,22 +309,41 @@ def generate_record(id):
     # now the conditionals
     if record['he_fe'] == "HE":
         record['affiliation'] = select_from(HE_AFFILIATIONS)
-        record['jacs'] = select_from(HE_JAX)
+        record['jacs'] = select_from(HE_JACS)
+        record['jacs_code'] = jacs_code(record['jacs'])
+        record['ld'] = None
+        record['ld_code'] = None
     else:
         record['affiliation'] = select_from(FE_AFFILIATIONS)
-        record['jacs'] = select_from(FE_JAX)
+        record['ld'] = select_from(FE_LD)
+        record['ld_code'] = ld_code(record['ld'])
+        record['jacs'] = None
+        record['jacs_code'] = None
     
-    record['keywords'] = random_keywords(record['jacs'])
+    subject = record['jacs'] if record['jacs'] is not None else record['ld']
+    record['keywords'] = random_keywords(subject)
     
     record['web_resource'] = 'false'
-    record['full_text'] = 'false'
+    record['uploaded_resource'] = 'false'
     wr_ft = select_from(WEB_RES_OR_FT)
     if wr_ft == "wr":
         record['web_resource'] = 'true'
     else:
-        record['full_text'] = 'true'
+        record['uploaded_resource'] = 'true'
     
     return record
+
+def ld_code(classification):
+    for key, value in LD.iteritems():
+        if value.lower() == classification.lower():
+            return key
+    return None
+
+def jacs_code(classification):
+    for key, value in JACS3.iteritems():
+        if value.lower() == classification.lower():
+            return key
+    return None
 
 def random_keywords(jacs):
     kws = KEYWORDS[jacs]
@@ -299,14 +406,17 @@ for id in range(SIZE):
     oers.append(generate_record(id))
 oer_csv = open("oers.csv", "w")
 writer = csv.writer(oer_csv)
-writer.writerow(["OER ID", "TITLE", "DESCRIPTION", "LANGUAGE", "AFFILIATION", "CREATOR", "CREATOR_ID", 
-                    "FORMAT", "HE/FE", "ORIGIN", "CREATED DATE", "JACS", "KEYWORDS", "TYPE", "WEB RESOURCE",
-                    "FULL TEXT"])
+
+writer.writerow(["OER ID", "Title", "Description", "Language", "Publisher", "Creator", "Creator ID", 
+                    "File Format", "HE/FE", "Record Origin", "Record Created Date", "JACS Code", 
+                    "JACS Classification", "Learn Direct Code", "Learn Direct Classification", 
+                    "Subject Keywords", "Type", "Web Resource", "Uploaded Resource"])
 for oer in oers:
     writer.writerow([oer['id'], oer['title'], oer['description'], oer['language'],
                     oer['affiliation'], oer['creator'], oer['creator_id'], oer['format'],
-                    oer['he_fe'], oer['origin'], oer['created_date'], oer['jacs'],
-                    ",".join(oer['keywords']), oer['type'], oer['web_resource'], oer['full_text']])
+                    oer['he_fe'], oer['origin'], oer['created_date'], oer['jacs_code'], oer['jacs'], 
+                    oer['ld_code'], oer['ld'], ",".join(oer['keywords']), oer['type'], oer['web_resource'], 
+                    oer['uploaded_resource']])
 oer_csv.close()
 
 def random_ip():
@@ -362,7 +472,8 @@ def count_views(events):
 # Statistical Event Lat	Statistical Event Long
 stat_csv = open("stats.csv", "w")
 stat_writer = csv.writer(stat_csv)
-stat_writer.writerow(["OER ID", "EVENT", "EVENT DATE", "IP", "LAT", "LONG"])
+stat_writer.writerow(["OER ID", "Statistical Event", "Statistical Event Date", 
+                        "Statistical Event IP", "Statistical Event Lat", "Statistical Event Long"])
 for oer in oers:
     events = []
     add_create(oer, events)
